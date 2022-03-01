@@ -42,15 +42,18 @@ public class StreamListSorting {
         List<String> sortedListLambdareverse = fruits.stream().sorted((value1, value2) -> value2.compareTo(value1)).collect(Collectors.toList());
         System.out.println(sortedListLambdareverse);
 
-        System.out.println("--");
-        System.out.println("sort employee by sakary ascending order");
-        // sort employee by sakary ascending order
+
 
         List<Employee> employees = new ArrayList<Employee>();
         employees.add(new Employee(10,"Ramesh",30,400000));
         employees.add(new Employee(20,"Santosh",29,350000));
-        employees.add(new Employee(30,"Sanjay",30,450000));
+        employees.add(new Employee(30,"Sanjay",31,450000));
         employees.add(new Employee(40,"Pramod",29,500000));
+
+        System.out.println("--");
+        System.out.println("sort employee by salary ascending order");
+        // sort employee by salary ascending order raw method
+
 
         List<Employee> employeesSortedList = employees.stream()
                 .sorted(new Comparator<Employee>(){
@@ -70,9 +73,27 @@ public class StreamListSorting {
                 .sorted(Comparator.comparingLong(Employee::getSalary))
                 .collect(Collectors.toList());
 
+        //same but with Comparator and list reversed
+        List<Employee> employeesSortedReverseListComparator = employees.stream()
+                .sorted(Comparator.comparingLong(Employee::getSalary).reversed())
+                .collect(Collectors.toList());
+
+        // sort employee by age ascending order
+        List<Employee> employeesSortedAgeListComparator = employees.stream()
+                .sorted(Comparator.comparingInt(Employee::getAge))
+                .collect(Collectors.toList());
+
+        // sort employee by name ascending order
+        List<Employee> employeesSortedNameListComparator = employees.stream()
+                .sorted(Comparator.comparing(Employee::getName))
+                .collect(Collectors.toList());
+
         System.out.println(employeesSortedList);
         System.out.println(employeesSortedListLambda);
         System.out.println(employeesSortedListComparator);
+        System.out.println(employeesSortedReverseListComparator);
+        System.out.println(employeesSortedAgeListComparator);
+        System.out.println(employeesSortedNameListComparator);
     }
 
 }
